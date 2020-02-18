@@ -6,6 +6,40 @@ export const LineChart = (props) => {
     const [lines, setLines] = useState(null)
     const [points, setPoints] = useState(null)
 
+    useEffect(() => {
+        const sortedData = getSortedData()
+        buildLines(sortedData)
+        buildCircles(sortedData)
+    }, [])
+
+    const buildLines = (sortedData) => {
+        const lines = sortedData.map((point, index, array) => {
+            if (index + 1 < array.length) {
+                return drawLine(
+                    sortedData[index].date,
+                    sortedData[index + 1].date,
+                    100 - sortedData[index].value,
+                    100 - sortedData[index + 1].value,
+                    index)
+            } else {
+                console.log('out of boundaries')
+            }
+        })
+        setLines(lines)
+    }
+
+    const buildCircles = (sortedData) => {
+        const points = sortedData.map((point, index, array) => {
+            const inRange = isWithingRange(point.value)
+            return drawCircle(
+                point.date,
+                100 - point.value,
+                inRange,
+                index)
+        })
+        setPoints(points)
+    }
+
     // TODO add text x axis
     const drawXAxis = () => {
         return <line x1="0" x2="100" y1="100" y2="100" stroke={axisColor} strokeWidth="1" />
@@ -21,8 +55,8 @@ export const LineChart = (props) => {
     }
 
     // TODO hover and show popover
-    const drawCircle = (cx, cy, isWithingRange = true) => {
-        return <circle cx={cx} cy={cy} r="1" fill={isWithingRange ? lineColor : '#F08080'} />
+    const drawCircle = (cx, cy, isWithingRange = true, key) => {
+        return <circle cx={cx} cy={cy} r="1" fill={isWithingRange ? lineColor : '#F08080'} key={key} />
     }
 
     const drawGraphArea = (x, y, width, height) => {
@@ -38,35 +72,6 @@ export const LineChart = (props) => {
 
         return y <= refRanges[1] && y >= refRanges[0]
     }
-
-    useEffect(() => {
-        const sortedData = getSortedData()
-        const lines = sortedData.map((point, index, array) => {
-            if (index + 1 < array.length) {
-                return drawLine(
-                    sortedData[index].date,
-                    sortedData[index + 1].date,
-                    100 - sortedData[index].value,
-                    100 - sortedData[index + 1].value,
-                    index)
-            } else {
-                console.log('out of boundaries')
-            }
-        })
-        setLines(lines)
-    }, [])
-
-    useEffect(() => {
-        const sortedData = getSortedData()
-        const points = sortedData.map((point, index, array) => {
-            const inRange = isWithingRange(point.value)
-            return drawCircle(
-                point.date,
-                100 - point.value,
-                inRange)
-        })
-        setPoints(points)
-    }, [])
 
     const getSortedData = () => {
         return props.data.sort((a, b) => a.date - b.date)
