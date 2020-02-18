@@ -1,3 +1,9 @@
+## HTML5 Chart simple examples
+
+Demo: https://html5-line-chart.herokuapp.com/
+
+-----------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
