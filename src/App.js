@@ -13,7 +13,7 @@ function App() {
     { date: 20, value: 30 }
   ]
 
-  const referenceRanges = [42, 68]
+  const referenceRanges = [19, 39]
 
   return (
     <article className="App">
