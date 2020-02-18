@@ -49,17 +49,22 @@ function App() {
   return (
     <article className="App">
 
-      <div className='chartWrapper'>
+      <div className='chartContainer'>
         <h4 className='title'>Line Chart</h4>
-        <LineChart data={randomFetchedDataA} />
+        <div className='chartWrapper'>
+          <LineChart data={randomFetchedDataA} />
+        </div>
 
         <button onClick={() => { randomizeSet('a') }}>Randomize data</button>
       </div>
 
 
-      <div className='chartWrapper'>
+      <div className='chartContainer'>
         <h4 className='title'>Line Chart with Target Range</h4>
-        <LineChart data={randomFetchedDataB} withGraphArea referenceRanges={referenceRanges} />
+        <div className='chartWrapper'>
+          <LineChart data={randomFetchedDataB} withGraphArea referenceRanges={referenceRanges} />
+        </div>
+
         <button onClick={() => { randomizeSet('b') }}>Randomize data</button>
       </div>
     </article>
