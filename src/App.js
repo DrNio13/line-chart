@@ -3,7 +3,7 @@ import './App.css';
 import { LineChart } from './components/LineChart';
 
 function App() {
-  // TODO date in millseconds
+  // TODO date in milliseconds
   // date is relative value to X axis
   const fetchData = [
     { date: 60, value: 83.30 },
@@ -13,11 +13,20 @@ function App() {
     { date: 20, value: 30 }
   ]
 
+  const referenceRanges = [42, 68]
+
   return (
     <article className="App">
-      <h4 className='title'>Line Chart</h4>
+
       <div className='chartWrapper'>
+        <h4 className='title'>Line Chart</h4>
         <LineChart data={fetchData} />
+      </div>
+
+
+      <div className='chartWrapper'>
+        <h4 className='title'>Line Chart with Target Range</h4>
+        <LineChart data={fetchData} withGraphArea referenceRanges={referenceRanges} />
       </div>
     </article>
   );

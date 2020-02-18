@@ -1,9 +1,13 @@
 .chartWrapper {
-    width: 30vw;
+    width: 40vw;
     height: 30vh;
     padding: 24px;
 }
 
 .title {
     padding: 24px;
+}
+
+.App {
+    display: flex;
 }
