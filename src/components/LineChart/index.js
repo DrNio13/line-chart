@@ -10,7 +10,7 @@ export const LineChart = (props) => {
         const sortedData = getSortedData()
         buildLines(sortedData)
         buildCircles(sortedData)
-    }, [])
+    }, [props.data])
 
     const buildLines = (sortedData) => {
         const lines = sortedData.map((point, index, array) => {
