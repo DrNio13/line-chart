@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './index.css'
 
 export const LineChart = (props) => {
     const axisColor = 'lightgrey'
@@ -8,8 +9,14 @@ export const LineChart = (props) => {
 
     useEffect(() => {
         const sortedData = getSortedData()
-        buildLines(sortedData)
-        buildCircles(sortedData)
+        if (props.withDates) {
+            buildLinesWithDatesXAxis(sortedData)
+            buildCirclesWithDatesXAxis(sortedData)
+        } else {
+            buildLines(sortedData)
+            buildCircles(sortedData)
+        }
+
     }, [props.data])
 
     const buildLines = (sortedData) => {
@@ -40,6 +47,14 @@ export const LineChart = (props) => {
         setPoints(points)
     }
 
+    const buildLinesWithDatesXAxis = (sortedData) => {
+        console.log(sortedData)
+    }
+
+    const buildCirclesWithDatesXAxis = (sortedData) => {
+
+    }
+
     // TODO add text x axis
     const drawXAxis = () => {
         return <line x1="0" x2="100" y1="100" y2="100" stroke={axisColor} strokeWidth="1" />
@@ -54,9 +69,17 @@ export const LineChart = (props) => {
         return <line x1={x1} x2={x2} y1={y1} y2={y2} stroke={lineColor} key={key} strokeWidth='0.2' />
     }
 
-    // TODO hover and show popover
     const drawCircle = (cx, cy, isWithingRange = true, key) => {
+        if (props.withGraphArea) {
+            return <circle className='circle' onClick={() => { showDataDetails(cx, cy, isWithingRange) }} cx={cx} cy={cy} r="1" fill={isWithingRange ? lineColor : '#F08080'} key={key} />
+        }
+
         return <circle cx={cx} cy={cy} r="1" fill={isWithingRange ? lineColor : '#F08080'} key={key} />
+    }
+
+    const showDataDetails = (cx, cy, isWithingRange) => {
+        window.alert(`value: ${Math.abs(100 - cy)}\nref.range: ${props.referenceRanges[0]}-${props.referenceRanges[1]}\n${isWithingRange ? 'result within range' : 'result out of range'}
+        `)
     }
 
     const drawGraphArea = (x, y, width, height) => {
@@ -80,8 +103,8 @@ export const LineChart = (props) => {
     return (<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         {drawXAxis()}
         {drawYAxis()}
+        {props.withGraphArea && drawGraphArea()}
         {lines}
         {points}
-        {props.withGraphArea && drawGraphArea()}
     </svg>)
 }

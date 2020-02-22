@@ -21,7 +21,13 @@ function App() {
     { date: 20, value: 30 }
   ])
 
+  const [randomFetchedDataWithDatesinMilliseconds, setRandomFetchedDataWithDatesinMilliseconds] = useState([
+    { date: new Date().getTime(), value: 80 },
+    { date: 1582357792321, value: 40 }
+  ])
+
   const [referenceRanges, setReferenceRanges] = useState([19, 39])
+  const [referenceRangesDates, setReferenceRangesDates] = useState([33, 69])
 
   const randomizeSet = (chart) => {
     if (chart === 'a') {
@@ -67,6 +73,7 @@ function App() {
 
         <button onClick={() => { randomizeSet('b') }}>Randomize data</button>
       </div>
+
     </article>
   );
 }
