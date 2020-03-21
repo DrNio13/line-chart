@@ -26,3 +26,8 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+.row {
+    display: flex;
+    flex: 1;
+}

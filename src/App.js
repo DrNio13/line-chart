@@ -55,23 +55,36 @@ function App() {
   return (
     <article className="App">
 
-      <div className='chartContainer'>
-        <h4 className='title'>Line Chart</h4>
-        <div className='chartWrapper'>
-          <LineChart data={randomFetchedDataA} />
+      <div className='row'>
+        <div className='chartContainer'>
+          <h4 className='title'>Line Chart</h4>
+          <div className='chartWrapper'>
+            <LineChart data={randomFetchedDataA} />
+          </div>
+
+          <button onClick={() => { randomizeSet('a') }}>Randomize data</button>
         </div>
 
-        <button onClick={() => { randomizeSet('a') }}>Randomize data</button>
+
+        <div className='chartContainer'>
+          <h4 className='title'>Line Chart with Target Range</h4>
+          <div className='chartWrapper'>
+            <LineChart data={randomFetchedDataB} withGraphArea referenceRanges={referenceRanges} />
+          </div>
+
+          <button onClick={() => { randomizeSet('b') }}>Randomize data</button>
+        </div>
       </div>
 
-
-      <div className='chartContainer'>
-        <h4 className='title'>Line Chart with Target Range</h4>
-        <div className='chartWrapper'>
-          <LineChart data={randomFetchedDataB} withGraphArea referenceRanges={referenceRanges} />
+      <div className='row'>
+        <div className='chartContainer'>
+          <h4 className='title'>Line Chart with Target Range with Date</h4>
+          <div className='chartWrapper'>
+            <LineChart data={randomFetchedDataWithDatesinMilliseconds} withGraphArea withDates referenceRanges={referenceRanges} />
+          </div>
+          <p>4 years historic data</p>
+          <button onClick={() => { randomizeSet('c') }}>Randomize data</button>
         </div>
-
-        <button onClick={() => { randomizeSet('b') }}>Randomize data</button>
       </div>
 
     </article>
