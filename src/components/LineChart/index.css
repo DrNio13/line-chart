@@ -1,3 +1,7 @@
 .circle:hover {
     cursor: pointer;
 }
+
+svg {
+    height: 70vh;
+}
